@@ -5,4 +5,5 @@ pwd:=$(shell pwd)
 all:
 	make -C $(kernel_path) M=$(pwd) modules
 clean:
-	rm *.o *.ko *.mod.c Module.symvers modules.order -f
+	rm *.o *.ko *.mod.c Module.symvers modules.order  -f
+	rm -r .tmp*
