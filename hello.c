@@ -5,6 +5,8 @@
 #include <linux/proc_fs.h>
 #include <linux/fs.h>
 #include <linux/decompress/mm.h>
+#include <linux/slab.h>
+#include <linux/gfp.h>
 #include <asm/uaccess.h>
 
 #define TRY "TRY"
@@ -13,6 +15,8 @@ MODULE_LICENSE("zzq_LICENSE");
 
 static char *msg;
 char *msg_Ptr;
+
+module_param(msg, charp, 0644);
 
 struct proc_dir_entry *pde;
 
@@ -51,8 +55,8 @@ ssize_t hello_write(struct file *filp, const char __user *buff, size_t len, loff
 
 static int __init hello_world_init(void) {
 	printk(KERN_INFO "zzq's hello world init\n");
-	msg = malloc(sizeof(char)*100);
-	sprintf(msg, "init\n");
+	//msg = malloc(sizeof(char)*100);
+	//sprintf(msg, "init\n");
 	
 	struct file_operations *proc_fops = malloc(sizeof(struct file_operations));
 	proc_fops->open = hello_open;
